@@ -8,6 +8,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author atejano
@@ -60,6 +61,11 @@ class GroupPricingTest {
         BestGroupPrice cbSenior = bestGroupPrices.stream().filter(g -> g.getCabinCode().equalsIgnoreCase("CB") && g.getRateGroup().equalsIgnoreCase("Senior"))
                 .findFirst().get();
         assertEquals(new BigDecimal(245.00), cbSenior.getPrice());
+
+
+        assertNull(bestGroupPrices.stream().filter(g -> g.getCabinCode().equalsIgnoreCase("CC") && g.getRateGroup().equalsIgnoreCase("Military"))
+                .findFirst().orElse(null));
+
     }
 
 

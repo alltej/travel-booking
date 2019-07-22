@@ -29,6 +29,8 @@ class PromotionCombinedTest {
         assertTrue(allCombinablePromotions.stream().filter(p -> p.getPromotionCodes().equals(asList("P2", "P3"))).findFirst().isPresent());
         assertTrue(allCombinablePromotions.stream().filter(p -> p.getPromotionCodes().equals(asList("P1", "P4", "P5"))).findFirst().isPresent());
         assertTrue(allCombinablePromotions.stream().filter(p -> p.getPromotionCodes().equals(asList("P3", "P4", "P5"))).findFirst().isPresent());
+        assertFalse(allCombinablePromotions.stream().filter(p -> p.getPromotionCodes().equals(asList("P1", "P3"))).findFirst().isPresent());
+        assertFalse(allCombinablePromotions.stream().filter(p -> p.getPromotionCodes().equals(asList("P2", "P4"))).findFirst().isPresent());
 
     }
 
@@ -38,10 +40,12 @@ class PromotionCombinedTest {
         List<PromotionCombo> p1Combos = PromotionCombined.getCombinablePromotions(p1.getCode(), allPromotions);
         assertTrue(p1Combos.stream().filter(p -> p.getPromotionCodes().equals(asList("P1", "P2"))).findFirst().isPresent());
         assertTrue(p1Combos.stream().filter(p -> p.getPromotionCodes().equals(asList("P1", "P4", "P5"))).findFirst().isPresent());
+        assertFalse(p1Combos.stream().filter(p -> p.getPromotionCodes().equals(asList("P2", "P3"))).findFirst().isPresent());
 
         System.out.println("******Combinable Promotions for " + p3.getCode() + " *******");
         List<PromotionCombo> p3Combos = PromotionCombined.getCombinablePromotions(p3.getCode(), allPromotions);
         assertTrue(p3Combos.stream().filter(p -> p.getPromotionCodes().equals(asList("P2", "P3"))).findFirst().isPresent());
         assertTrue(p3Combos.stream().filter(p -> p.getPromotionCodes().equals(asList("P3", "P4", "P5"))).findFirst().isPresent());
+        assertFalse(p3Combos.stream().filter(p -> p.getPromotionCodes().equals(asList("P1", "P2"))).findFirst().isPresent());
     }
 }
